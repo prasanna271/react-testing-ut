@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
 describe('Tests for Counter App',()=>{
@@ -13,5 +14,16 @@ describe('Tests for Counter App',()=>{
        * 5. Similarly perform actions 3 and 4 for decrement.
        * 
       */
+
+      expect(screen.getByText('0')).toBeInTheDocument();
+
+      expect(screen.getByRole('button',{name: 'increment'}));
+      expect(screen.getByRole('button',{name: 'decrement'}));
+
+      userEvent.click(screen.getByRole('button',{name: 'increment'}));
+      expect(screen.findByText('1'));
+
+      userEvent.click(screen.getByRole('button',{name: 'decrement'}));
+      expect(screen.findByText('0'));
     });
 })
